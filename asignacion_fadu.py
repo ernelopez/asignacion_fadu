@@ -106,22 +106,3 @@ if st.button("Resolver"):
     
     else:
         st.error("No se encontró solución")
-    if res.success:
-        sol = res.x.reshape((n, M))
-
-        asignacion = {doc: [] for doc in docentes}
-
-        for i in range(n):
-            j = np.argmax(sol[i])
-            asignacion[docentes[j]].append(letras[i])
-
-        st.subheader("Asignación")
-        st.json(asignacion)
-
-        st.subheader("Totales por docente")
-        for j in range(M):
-            total = sum(pesos[i] * sol[i, j] for i in range(n))
-            st.write(f"{docentes[j]}: {int(total)}")
-
-    else:
-        st.error("No se encontró solución")
