@@ -1,6 +1,7 @@
 import streamlit as st
 import numpy as np
 from scipy.optimize import milp, LinearConstraint, Bounds
+import pandas as pd
 
 st.title("Asignación de letras a docentes")
 
@@ -78,7 +79,33 @@ if st.button("Resolver"):
         bounds=bounds,
         integrality=integrality
     )
-
+    
+    if res.success:
+        sol = res.x.reshape((n, M))
+    
+        filas = []
+    
+        for j in range(M):
+            letras_doc = []
+            for i in range(n):
+                if sol[i, j] > 0.5:
+                    letras_doc.append(letras[i])
+    
+            total = sum(pesos[i] * sol[i, j] for i in range(n))
+    
+            filas.append({
+                "Docente": docentes[j],
+                "Cantidad": int(total),
+                "Letras": ", ".join(letras_doc)
+            })
+    
+        df = pd.DataFrame(filas)
+    
+        st.subheader("Resultado")
+        st.dataframe(df, use_container_width=True)
+    
+    else:
+        st.error("No se encontró solución")
     if res.success:
         sol = res.x.reshape((n, M))
 
