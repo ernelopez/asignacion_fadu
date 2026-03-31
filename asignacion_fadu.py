@@ -9,10 +9,10 @@ st.title("Asignación de letras a docentes")
 
 st.subheader("Cantidades por letra")
 default_letras = {
-    'A':37 , 'B':34, 'C':50, 'D':17, 'E':5, 'F':25, 'G':47,
-    'H':12 , 'I':1, 'J':5, 'K':2, 'L':27, 'M':48, 'N':8,
-    'O':11 , 'P':40, 'Q':6, 'R':41, 'S':34, 'T':12, 'U':7,
-    'V':14 , 'W':3, 'X':0, 'Y':5, 'Z':6
+    'A':35 , 'B':35, 'C':47, 'D':19, 'E':5, 'F':26, 'G':47,
+    'H':12 , 'I':1, 'J':5, 'K':2, 'L':25, 'M':48, 'N':8,
+    'O':11 , 'P':38, 'Q':7, 'R':41, 'S':32, 'T':12, 'U':7,
+    'V':14 , 'W':1, 'X':0, 'Y':5, 'Z':5
 }
 
 dicc_letras = {}
@@ -103,6 +103,7 @@ if st.button("Resolver"):
     
         st.subheader("Resultado")
         st.dataframe(df, use_container_width=True)
+        st.text(f"Total estudiantes: {N}")
     
     else:
         st.error("No se encontró solución")
